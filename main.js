@@ -10,8 +10,8 @@ ball_height = 5;
 
 hole_y= 400;
 hole_x=800;
-block_image_x = 0;
-block_image_y = 0;
+block_image_x = 10;
+block_image_y = 10;
 ball_y = 0;
 ball_x = 0;
 
@@ -19,7 +19,7 @@ function load_img(){
 	fabric.Image.fromURL("golf-h.png", function(Img){
 		hole_obj = Img;
 		hole_obj.scaleToWidth(50);
-		hole_obj.scaleToHeigth(50);
+		hole_obj.scaleToHeight(50);
 		hole_obj.set({
 			top:hole_y,
 			left:hole_x
@@ -31,15 +31,15 @@ function load_img(){
 
 function new_image()
 {
-	fabric.Image.fromURL("golf-h.png", function(Img){
+	fabric.Image.fromURL("ball.png", function(Img){
 		ball_obj = Img;
 		ball_obj.scaleToWidth(50);
-		ball_obj.scaleToHeigth(50);
+		ball_obj.scaleToHeight(50);
 		ball_obj.set({
 			top:ball_y,
 			left:ball_x
 		});
-	canvas.add(hole_obj);
+	canvas.add(ball_obj);
 	});
 }
 
@@ -49,15 +49,12 @@ function my_keydown(e)
 {
 	keyPressed = e.keyCode;
 	console.log(keyPressed);
-	isFinite((ball_x==hole_x)&&(ball_y==hole_y))
+
+	if((ball_x==800)&&(ball_y==400)){
 		canvas.remove(ball_obj);
 		document.getElementById("hd3").innerHTML="You hit the goal!!!";
 		document.getElementById("myCanvas").style.borderColor="green";
 	}
-	/* Check the coordinates of the ball and hole images to finish the game. 
-	And id coordinates matches them remove ball image, 
-	display "GAME OVER!!!" 
-	and make canvas border 'red'. */
 	
 	if(keyPressed == '37')
 	{
@@ -120,3 +117,4 @@ function my_keydown(e)
 			new_image()
 		}
 	}
+}
